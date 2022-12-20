@@ -60,13 +60,29 @@ public class ReportController {
 	
 	//=======================김도영===================
 	@GetMapping("/kdy/reportAdd")
-	public ModelAndView reportAdd(ReportApplyVO reportApplyVO, Principal principal)throws Exception{
+	public ModelAndView reportAdd(ReportApplyVO reportApplyVO, Principal principal, HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
+
+		if(principal == null) {
+			mv.setViewName("user/login");
+			return mv;
+		}
 		
-//		if(principal == null) {
-//			mv.setViewName("user/login");
-//			return mv;
-//		}
+	    SecurityContextImpl context = (SecurityContextImpl)session.getAttribute("SPRING_SECURITY_CONTEXT");
+	    Authentication authentication = context.getAuthentication();
+	    UserVO userVO  = (UserVO)authentication.getPrincipal();
+	      
+	    int id = Integer.parseInt(principal.getName());
+	    userVO.setId(id);
+
+	       
+	    userVO = reportMapper.getFirstList(userVO);   //나의 첫번째 승인자 리스트를 띄움
+	    mv.addObject("userVO", userVO);
+	    userVO = reportMapper.getlastlist(userVO);
+	    mv.addObject("userVO2", userVO);
+	    userVO = userMapper.getMypage(userVO);
+	    mv.addObject("userVO3", userVO);
+		
 		
 		mv.setViewName("kdy/reportAdd");
 		
