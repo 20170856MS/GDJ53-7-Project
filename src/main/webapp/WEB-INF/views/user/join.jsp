@@ -78,6 +78,7 @@
 														<th>부서</th>
 														<th>직급</th>
 														<th>입사일</th>
+														
 													</tr>
 													<tr>
 														<td id="id"></td>
@@ -85,6 +86,7 @@
 														<td id="dep"></td>
 														<td id="role"></td>
 														<td id="date"></td>
+														
 													</tr>
 												</table>
 												<div id="noDate" class="text-center" style="display: none"></div>
@@ -102,7 +104,7 @@
 
 								<form:form action="join" modelAttribute="userVO" method="post"
 									enctype="multipart/form-data">
-
+	
 									<div class="d-flex my-3">
 										<div style="margin: auto 0; width: 45%">
 											<b>사원번호</b>
@@ -124,6 +126,12 @@
 											readonly="readonly" style="width: 65%; height: 35px; cursor: not-allowed">
 									</div>
 
+									
+									<input
+											type="text" class="form-control" id="addDepNum" name="depNum"
+											readonly="readonly" style="width: 65%; height: 35px; cursor: not-allowed; display: none;">
+									
+								
 									<div class="d-flex my-3">
 										<b style="margin: auto 0; width: 45%">부서</b> <input
 											type="text" class="form-control" id="addDep"

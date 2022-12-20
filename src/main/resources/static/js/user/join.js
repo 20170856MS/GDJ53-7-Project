@@ -8,6 +8,7 @@ $("#search").click(function () {
     $("#addId").val("");
     $("#addName").val("");
     $("#addDep").val("");
+    $("#addDepNum").val("");
 
     let id = $("#idCheck").val();
     let name = $("#nameCheck").val();
@@ -45,6 +46,7 @@ $("#search").click(function () {
                     $("#addId").val(data.id)
                     $("#addName").val(data.name)
                     $("#addDep").val(data.departmentVO.depName)
+                    $("#addDepNum").val(data.depNum)
                     $("#submit").attr("type", "");
                 })
             }

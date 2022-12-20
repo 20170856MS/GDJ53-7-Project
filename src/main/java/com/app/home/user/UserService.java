@@ -244,10 +244,12 @@ public class UserService {
 			String fileName = fileManager.saveFile(f, path);
 			userVO.setProfile(fileName);
 			log.info("=====회원가입 : {}", userVO);
-			return userMapper.setJoin(userVO);
+			userMapper.setJoin(userVO);
+			return reportMapper.setLicenserAdd(userVO);
 		}
 		
-		return userMapper.setJoin(userVO);
+		 userMapper.setJoin(userVO);
+		return reportMapper.setLicenserAdd(userVO);
 	}
 
 	//사용자 검증 메서드(인증된 사원번호 체크, 이메일 입력 체크, 비번 일치 검증, 휴대번호 입력 검증)

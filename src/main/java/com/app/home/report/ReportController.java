@@ -794,7 +794,7 @@ public class ReportController {
 			return mv;
 		}
 		
-		reportApplyVO.setId(Integer.parseInt(principal.getName()));
+		 reportApplyVO.setId(Integer.parseInt(principal.getName()));
 		
 		int result = reportApplyVO.getReportNum();
 		
