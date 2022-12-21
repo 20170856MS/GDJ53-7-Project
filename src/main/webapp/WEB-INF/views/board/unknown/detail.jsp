@@ -45,45 +45,67 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
               <!-- <a href="/unknown/list" role="button" class="btn btn-success">목록으로</a> -->
-              <button type="button" class="btn btn-success" id="goListBtn">이전으로</button>
+              <button type="button" class="btn btn-success mb-3" id="goListBtn">이전으로</button>
               <!-- 공지사항 작성 -->
               <div class="card mb-3">
 
                 <div class="card-header bg-white">
                   <div class="row justify-content-between">
                     <div class="col-auto align-self-center">
-                      <h5 class="mb-0 text-gray-800" data-anchor="data-anchor" id="file-input">[익명] ${boardVO.title}
+                      <h5 class="mb-2 text-gray-800" data-anchor="data-anchor" id="file-input">[익명] ${boardVO.title}
                       </h5>
+                      <div style="display: flex">
+	                      <p style="margin-right: 5px" id="regdate" data-date="${boardVO.regDate}"> 등록 </p>
+	                      <c:if test="${boardVO.updateDate != null}">
+	                    	 <p>| 수정 
+	                      	<fmt:formatDate value="${boardVO.updateDate}" pattern="yyyy-MM-dd HH:mm"/></p>
+	                      </c:if>
+                      </div>
                     </div>
                     <div class="col-fill ml-auto align-self-end mr-5">
                       <p>조회수 ${boardVO.hit} </p>
-                      <p id="regdate" data-date="${boardVO.regDate}"> 등록일자 </p>
-                      <c:if test="${boardVO.updateDate != null}">
-                    	 수정일자 
-                      	<fmt:formatDate value="${boardVO.updateDate}" pattern="yyyy-MM-dd HH:mm"/>
-                      </c:if>
                     </div>
                   </div>
                 </div>
                 <div class="card-body" style="min-height: 500px">
                   <div class="mb-1 row justify-content-end">
                     <div class="col-2">
-                    <c:if test="${!empty boardVO.fileVOs }">
-                  	<button class="btn btn-outline-dark btn-block  dropdown-toggle dropdown-toggle-split"  data-toggle="dropdown" aria-expanded="false" type="button">
-                            <span class="material-symbols-outlined my-auto" style="vertical-align: middle;">
-                              
-                            </span>
-
-                            <span style="vertical-align: middle;"> 첨부파일 (${fn:length(boardVO.fileVOs) }) </span>
-                      </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                          <c:forEach items="${boardVO.fileVOs}" var="file" varStatus="status">
-	                        <a class="dropdown-item" href="https://gdj537-yeyey.s3.ap-northeast-2.amazonaws.com/${file.fileName}">${file.oriName } (${file.fileSize}) </a>
-	                        <c:if test="${status.last ne true}"><div class="dropdown-divider"></div></c:if>
-	                      </c:forEach>
-
-						  </div>
-					</c:if>
+	                    <jsp:useBean id="now" class="java.util.Date" />
+						<c:if test="${(now.time - boardVO.regDate.time) >= (1000*60*60*24*90)}">
+						<c:if test="${!empty boardVO.fileVOs }">
+	                  	<button class="btn btn-outline-dark btn-block  dropdown-toggle dropdown-toggle-split"  data-toggle="dropdown" aria-expanded="false" type="button">
+	                            <span class="material-symbols-outlined my-auto" style="vertical-align: middle;">
+	                              
+	                            </span>
+	                            <span style="vertical-align: middle;"> 만료된 파일 (${fn:length(boardVO.fileVOs) }) </span>
+	                      </button>
+	                        <div class="dropdown-menu dropdown-menu-right">
+	                          <c:forEach items="${boardVO.fileVOs}" var="file" varStatus="status">
+		                        <a class="dropdown-item" href="javascript:void(0)">${file.oriName } (${file.fileSize}) </a>
+		                        <c:if test="${status.last ne true}"><div class="dropdown-divider"></div></c:if>
+		                      </c:forEach>
+	
+							  </div>
+						</c:if>
+						</c:if>
+						<c:if test="${(now.time - boardVO.regDate.time) < (1000*60*60*24*90)}">
+						<c:if test="${!empty boardVO.fileVOs }">
+	                  	<button class="btn btn-outline-dark btn-block  dropdown-toggle dropdown-toggle-split"  data-toggle="dropdown" aria-expanded="false" type="button">
+	                            <span class="material-symbols-outlined my-auto" style="vertical-align: middle;">
+	                              
+	                            </span>
+	                            <span style="vertical-align: middle;"> 첨부파일 (${fn:length(boardVO.fileVOs) }) </span>
+	                      </button>
+	                        <div class="dropdown-menu dropdown-menu-right">
+	                          <c:forEach items="${boardVO.fileVOs}" var="file" varStatus="status">
+		                        <a class="dropdown-item" href="https://gdj537-yeyey.s3.ap-northeast-2.amazonaws.com/${file.fileName}">${file.oriName } (${file.fileSize}) </a>
+		                        <c:if test="${status.last ne true}"><div class="dropdown-divider"></div></c:if>
+		                      </c:forEach>
+	
+							  </div>
+						</c:if>
+						</c:if>
+                    
                     </div>
                   </div>
                   <div class="mb-5 row">
