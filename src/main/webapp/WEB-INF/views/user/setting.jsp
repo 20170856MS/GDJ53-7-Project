@@ -158,7 +158,7 @@
                     		<img id="profile_image" src="/img/user/user.webp" class="rounded" alt="..." style="width: 180px; height:180px; margin-right: 1.3em">
                     	</c:when>
                     	<c:otherwise>
-		                    <img id="profile_image" src="/file/profile/${userVO.profile}" class="rounded" alt="..." style="width: 180px; height:180px; margin-right: 1.3em">            	
+		                    <img id="profile_image" src="/file/user/${userVO.profile}" class="rounded" alt="..." style="width: 180px; height:180px; margin-right: 1.3em">            	
                     	</c:otherwise>
                     </c:choose>
                        <div class="d-flex pt-3">
@@ -296,7 +296,7 @@
                       <div class="d-flex justify-content-end pb-4 ps-4 pe-4">
                         <button
                           type="button"
-                          class="btn btn-success"
+                          class="btn btn-primary"
                           style="border-radius: 18px; padding: 6px 18px"
                           data-bs-dismiss="modal"
                         >
@@ -335,7 +335,7 @@
                       <div class="d-flex justify-content-end pb-4 ps-4 pe-4">
                         <button
                           type="button"
-                          class="btn btn-success"
+                          class="btn btn-primary"
                           style="border-radius: 18px; padding: 6px 18px"
                           data-bs-dismiss="modal"
                           onclick="location.href='/user/setting'"
